@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles/reset.css">
+    <link rel="stylesheet" href="/src/styles/variaveis.css">
+    <link rel="stylesheet" href="src/styles/index.css">
+    <link rel="stylesheet" href="src/modals/modais.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="src/styles/buttons.css">
+    <title>Tech Empresas</title>
+</head>
+
+<body>
+    <header>
+        <h3 class="logo">Tech Empresas</h1>
+            <nav class="ajusteBtn">
+                <button class="button-default" id="loginbtn">Login</button>
+                <button class="button-default" id="registerbtn">Register</button>
+            </nav>
+    </header>
+    <main class="container">
+        <h1>Empresas parceiras cadastradas</h1>
+        <section class="companies__container">
+            <div class="container">
+                <div class="companies__options-list">
+                
+                    <select class="companies__option selects" name="" id="selectListSector">
+                        <option value="" disabled selected>Selecionar Setor</option>
+                        <option value="all">Todos os setores</option>
+                    </select>
+                    <ul class="companies__list">
+    
+                    </ul>
+                </div>
+            </div>  
+        </section>
+    </main>
+
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script type="module" src="src/js/index.js"></script>
+
+</html>
