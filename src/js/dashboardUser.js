@@ -4,7 +4,7 @@ import { Modals } from "./modals.js"
 
 class Dashboard {
 
-    static handleLogout () {
+    static handleLogout() {
         const buttonLogout = document.getElementById("logoutBtn")
         buttonLogout.addEventListener("click", () => {
             window.location.replace("../../../../index.html")
@@ -14,14 +14,14 @@ class Dashboard {
         })
     }
 
-    static async handleRenderCompanie () {
+    static async handleRenderCompanie() {
         const demartament = await ApiRequests.getUserPeopleDepartament()
         const company_uuid = demartament[0].company_uuid
-        
-        const arrCompanies = await ApiRequests.getAllCompanies()
-        const companie = arrCompanies.find(({uuid}) => uuid == company_uuid)
 
-        const { name, opening_hours, description: descriptionCompanie, sectors: { description: descriptionSector }} = companie
+        const arrCompanies = await ApiRequests.getAllCompanies()
+        const companie = arrCompanies.find(({ uuid }) => uuid == company_uuid)
+
+        const { name, opening_hours, description: descriptionCompanie, sectors: { description: descriptionSector } } = companie
 
         const content = document.querySelector(".companie__content")
 
@@ -34,7 +34,7 @@ class Dashboard {
         `)
     }
 
-    static async handleRenderDepartament () {
+    static async handleRenderDepartament() {
         const departament = await ApiRequests.getUserDepartaments()
         const { name, description } = departament
 
@@ -46,13 +46,13 @@ class Dashboard {
         `)
     }
 
-    static async handleListPeopleDepartament () {
-    const content = document.querySelector(".list__people-departaments")        
+    static async handleListPeopleDepartament() {
+        const content = document.querySelector(".list__people-departaments")
         const arrPeopleDepartament = await ApiRequests.getUserPeopleDepartament()
 
-   
+
         arrPeopleDepartament[0].users.forEach((people) => {
-            const { username,  professional_level, kind_of_work} = people
+            const { username, professional_level, kind_of_work } = people
 
             content.insertAdjacentHTML("beforeend", `
                 <li class="list-slide__card">
@@ -66,12 +66,12 @@ class Dashboard {
     }
 
 
-    static async handleListDepartamentes () {
+    static async handleListDepartamentes() {
         const content = document.querySelector(".list__companie-departaments")
         const companie = await ApiRequests.getUserDepartaments()
-    
+
         companie.departments.forEach((departament) => {
-            const {name, description} = departament
+            const { name, description } = departament
 
             content.insertAdjacentHTML("beforeend", `
             <li class="list-slide__card">
@@ -84,10 +84,10 @@ class Dashboard {
     }
 
 
-    static async handleeditInfouser () {
+    static async handleeditInfouser() {
         const buttonEditUser = document.getElementById("edit")
         buttonEditUser.addEventListener("click", () => {
-            Modals.handleFormEditUser () 
+            Modals.handleFormEditUser()
 
             setTimeout(() => {
                 const buttonEditForm = document.getElementById("buttonEditForm")

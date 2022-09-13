@@ -5,16 +5,16 @@ import { ApiRequests } from "./api.js";
 const btnMobile = document.getElementById('btn-mobile');
 
 function toggleMenu(event) {
-  if (event.type === 'touchstart') event.preventDefault();
-  const nav = document.getElementById('nav');
-  nav.classList.toggle('active');
-  const active = nav.classList.contains('active');
-  event.currentTarget.setAttribute('aria-expanded', active);
-  if (active) {
-    event.currentTarget.setAttribute('aria-label', 'Fechar Menu');
-  } else {
-    event.currentTarget.setAttribute('aria-label', 'Abrir Menu');
-  }
+    if (event.type === 'touchstart') event.preventDefault();
+    const nav = document.getElementById('nav');
+    nav.classList.toggle('active');
+    const active = nav.classList.contains('active');
+    event.currentTarget.setAttribute('aria-expanded', active);
+    if (active) {
+        event.currentTarget.setAttribute('aria-label', 'Fechar Menu');
+    } else {
+        event.currentTarget.setAttribute('aria-label', 'Abrir Menu');
+    }
 }
 
 btnMobile.addEventListener('click', toggleMenu);
@@ -24,7 +24,7 @@ class AccessControl {
 
     static isAdmin = localStorage.getItem("@kenzieEmpresas:is_admin")
 
-    static handleLogout () {
+    static handleLogout() {
         const buttonLogout = document.getElementById("logoutBtn")
         buttonLogout.addEventListener("click", () => {
             window.location.replace("../../../../index.html")
@@ -34,7 +34,7 @@ class AccessControl {
         })
     }
 
-    static handleIsAdmin () {
+    static handleIsAdmin() {
         if (!this.isAdmin) {
             window.location.replace("../../../../index.html")
         }
@@ -49,12 +49,12 @@ class Companies {
 
     static arrCompanies = []
 
-    static async Workers(){
+    static async Workers() {
         const list = document.querySelector('.out-of-work')
 
     }
 
-    static async handleListCompanies (arrCompanies) {
+    static async handleListCompanies(arrCompanies) {
         const list = document.querySelector(".companies__list")
         list.innerHTML = ""
 
@@ -63,11 +63,11 @@ class Companies {
             this.arrCompanies = arrCompanies
         }
 
-        arrCompanies.forEach( async (companie) => {
-            const { uuid } = companie 
+        arrCompanies.forEach(async (companie) => {
+            const { uuid } = companie
             const departament = await ApiRequests.getSectorsCompanie(uuid)
             const people = await ApiRequests.getAllUser()
-            
+
             const peopleFilterDepartament = []
             departament.forEach((dp) => {
                 const { uuid } = dp
@@ -79,22 +79,22 @@ class Companies {
 
                         peopleFilterDepartament.push(people)
                     }
-                })    
+                })
             })
-             
+
             const card = this.handlCardCompanies(companie, departament, peopleFilterDepartament)
             list.append(card)
-            
+
         })
     }
 
-    static handlCardCompanies (companie, departament, people) {
-        const { name, opening_hours , description :descriptionCompanie, sectors: {description : descriptionSectors} } = companie
+    static handlCardCompanies(companie, departament, people) {
+        const { name, opening_hours, description: descriptionCompanie, sectors: { description: descriptionSectors } } = companie
 
-       
+
         const card = document.createElement("li")
         const divCardInfo = document.createElement("div")
-        const pNameCompanie = document.createElement("p") 
+        const pNameCompanie = document.createElement("p")
         const pSectorCompanie = document.createElement("p")
         const pDescriptionCompanie = document.createElement("p")
         const pOpenHours = document.createElement("p")
@@ -102,9 +102,9 @@ class Companies {
         const spanSectorCompanie = document.createElement("span")
         const spanDescriptionCompanie = document.createElement("span")
         const spanOpenHoursCompanie = document.createElement("span")
-        
+
         card.className = "companies__card"
-        divCardInfo. className = "card__info"
+        divCardInfo.className = "card__info"
         spanNameCompanie.innerText = "Empresa: "
         spanSectorCompanie.innerText = "Setor: "
         spanDescriptionCompanie.innerText = "Descrição: "
@@ -121,7 +121,7 @@ class Companies {
         pDescriptionCompanie.insertAdjacentText("beforeend", descriptionCompanie)
         pSectorCompanie.insertAdjacentText("beforeend", descriptionSectors)
         pOpenHours.insertAdjacentText("beforeend", opening_hours)
-        
+
         divCardInfo.append(pNameCompanie, pDescriptionCompanie, pOpenHours)
         card.append(divCardInfo)
 
@@ -134,15 +134,15 @@ class Companies {
 
             departament.forEach((dp) => {
 
-                const { name , description } = dp
+                const { name, description } = dp
 
                 const cardSlideDepartament = document.createElement("li")
                 const pNameDepartament = document.createElement("p")
                 const pDescriptionDepartament = document.createElement("p")
-                const spanNameDepartament = document.createElement("span") 
-                const spanDescriptionDepartament = document.createElement("span") 
-                
-                cardSlideDepartament .className = "list-slide__card"
+                const spanNameDepartament = document.createElement("span")
+                const spanDescriptionDepartament = document.createElement("span")
+
+                cardSlideDepartament.className = "list-slide__card"
                 titleDepartament.innerText = "Departamentos: "
                 spanNameDepartament.innerText = "Departamento: "
                 spanDescriptionDepartament.innerText = "Descrição: "
@@ -163,17 +163,17 @@ class Companies {
         if (people.length) {
             const divPeople = document.createElement("div")
             const titlePeople = document.createElement("h3")
-            const listPeople= document.createElement("ul")
+            const listPeople = document.createElement("ul")
 
             people.forEach((pp) => {
-                const { username, professional_level} = pp
+                const { username, professional_level } = pp
 
                 const cardSlidePeople = document.createElement("li")
                 const pNamePeople = document.createElement("p")
                 const pLevelPeople = document.createElement("p")
-                const spanNamePeople = document.createElement("span") 
-                const spanLevelPeople = document.createElement("span") 
-    
+                const spanNamePeople = document.createElement("span")
+                const spanLevelPeople = document.createElement("span")
+
                 divPeople.className = "card__People"
                 listPeople.className = "card__list-slide"
                 cardSlidePeople.className = "list-slide__card"
@@ -190,7 +190,7 @@ class Companies {
                 cardSlidePeople.append(pNamePeople, pLevelPeople)
 
                 listPeople.append(cardSlidePeople)
-                
+
             })
             divPeople.append(titlePeople, listPeople)
             card.append(divPeople)
@@ -198,13 +198,13 @@ class Companies {
         return card
     }
 
-    static handleSelect () {
-       const select = document.getElementById("selectListSector")
+    static handleSelect() {
+        const select = document.getElementById("selectListSector")
         this.handleSelectList()
 
         select.addEventListener("change", async () => {
             const value = select.value
- 
+
 
             if (value != "all") {
                 const arrSearch = await ApiRequests.getCompaniesSector(value)
@@ -222,7 +222,7 @@ class Companies {
         const arrCompanies = await ApiRequests.getAllCompanies()
         arrCompanies.forEach((companie) => {
 
-            const { sectors: { description }} = companie
+            const { sectors: { description } } = companie
             const arrOptions = Array.from(document.querySelectorAll("#selectListSector option"))
             const existUuid = arrOptions.some((op) => op.value == description)
 
@@ -237,12 +237,12 @@ class Companies {
 
 
 
-    static searchCompanie () {
+    static searchCompanie() {
         const inputSearch = document.getElementById("inputSearch")
         inputSearch.addEventListener("keyup", () => {
             const value = inputSearch.value.trim().toLowerCase()
             if (value != "") {
-                const arrSearch = this.arrCompanies.filter(({name}) => name.toLowerCase().includes(value))
+                const arrSearch = this.arrCompanies.filter(({ name }) => name.toLowerCase().includes(value))
                 this.handleListCompanies(arrSearch)
             } else {
                 this.handleListCompanies()
@@ -251,12 +251,12 @@ class Companies {
     }
 
 
-    static createCompany () {
+    static createCompany() {
         const buttonCreateCompany = document.getElementById("buttonCreateCompany")
         buttonCreateCompany.addEventListener("click", () => {
             Modals.handleFormCreateCompany()
 
-           setTimeout(() => {
+            setTimeout(() => {
                 const buttonCreateCompanyForm = document.getElementById("buttonCreateCompanyForm")
 
                 buttonCreateCompanyForm.addEventListener("click", async () => {
@@ -270,17 +270,17 @@ class Companies {
                         description: description,
                         opening_hours: opening_hours,
                         sector_uuid: sector_uuid
-                    } 
+                    }
 
-                    const response = await ApiRequests.createCompany(companie) 
+                    const response = await ApiRequests.createCompany(companie)
 
                     if (!response.error) {
                         Modals.handleRemoveModal()
                         this.handleListCompanies()
                         Companies.handleSelect()
-                    }        
+                    }
                 })
-           }, 500)
+            }, 500)
         })
     }
 }
@@ -294,19 +294,19 @@ class Departamentes {
 
     static contentContainer = document.querySelector(".companies__container")
 
-    static handleClenContent () {
+    static handleClenContent() {
         this.contentContainer.innerHTML = ""
     }
 
-    static createDepartament () {
+    static createDepartament() {
         const buttonCreate = document.getElementById("create-dep")
         buttonCreate.addEventListener("click", () => {
             Modals.handleFormCreateDepartament()
 
-            setTimeout (() => {
+            setTimeout(() => {
                 const buttonCreateForm = document.getElementById("buttonCreateDepartamentForm")
                 buttonCreateForm.addEventListener("click", async () => {
-                    
+
                     const name = document.getElementById("inputName").value
                     const description = document.getElementById("inputDescription").value
                     const company_uuid = document.getElementById("selectCompanieForm").value
@@ -325,12 +325,12 @@ class Departamentes {
     }
 
 
-    static listDepartament () {
+    static listDepartament() {
         const buttonListDepartamentes = document.getElementById("listar-dep")
         buttonListDepartamentes.addEventListener("click", () => {
             Modals.listCompanie()
 
-            setTimeout (() => {
+            setTimeout(() => {
                 const buttonListForm = document.getElementById("buttonListDepartamentCompanieForm")
                 buttonListForm.addEventListener("click", async () => {
                     const select = document.getElementById("selectListDepartamentForm")
@@ -340,7 +340,7 @@ class Departamentes {
 
                     const list = document.createElement("ul")
                     list.className = "card__list-slide1"
-                    
+
                     this.handleClenContent()
                     this.contentContainer.append(list)
 
@@ -349,12 +349,12 @@ class Departamentes {
                         list.append(card)
                     })
                 })
-            },500)
+            }, 500)
         })
     }
 
 
-    static handleCardListDepartaments (departament) {
+    static handleCardListDepartaments(departament) {
 
         const { name, description } = departament
 
@@ -377,84 +377,84 @@ class Departamentes {
 
         card.append(pName, pDescription)
 
-        return card        
+        return card
     }
 
-    static editDepartament () {
+    static editDepartament() {
         const buttonEditDel = document.getElementById("editar-dep")
         buttonEditDel.addEventListener("click", () => {
-            Modals.handleFormDepartamentSpec(true) 
+            Modals.handleFormDepartamentSpec(true)
 
             setTimeout(() => {
-                const buttonEdit = document.getElementById("buttonEditForm") 
+                const buttonEdit = document.getElementById("buttonEditForm")
                 const buttonDel = document.getElementById("buttonDelForm")
                 buttonEdit.addEventListener("click", () => {
                     const departament = document.getElementById("selectDepartamentForm").value
-                    
-                    Modals.ediDepartament ()
-                    
+
+                    Modals.ediDepartament()
+
                     setTimeout(() => {
                         const buttonEditFinish = document.getElementById("buttonFinishEdit")
                         buttonEditFinish.addEventListener("click", () => {
-                            const description = document.getElementById("newDescriptionForm").value.trim() 
+                            const description = document.getElementById("newDescriptionForm").value.trim()
 
                             if (description != "") {
                                 const newDescription = {
                                     description: description
                                 }
-                                
+
                                 ApiRequests.editDepartament(departament, newDescription)
                             }
                         })
-                    },500)
+                    }, 500)
                 })
-                
+
                 buttonDel.addEventListener("click", () => {
                     const departament = document.getElementById("selectDepartamentForm").value
                     ApiRequests.delDepartament(departament)
                 })
-            },500)
+            }, 500)
         })
     }
 
-    static handleListPeopleDepartament () {
+    static handleListPeopleDepartament() {
         const buttonView = document.getElementById("exibir-fun")
         buttonView.addEventListener("click", () => {
             Modals.handleFormViewPeople()
 
             setTimeout(() => {
-                const buttonViewPeopleForm = document.getElementById("buttonViewPeopleForm")   
+                const buttonViewPeopleForm = document.getElementById("buttonViewPeopleForm")
                 buttonViewPeopleForm.addEventListener("click", async () => {
                     const departament = document.getElementById("selectDepartamentForm").value
-                    if(departament == 'out'){
+                    if (departament == 'out') {
                         const arrPeople = await ApiRequests.outOfWork()
                         this.handleListPeopleDepartamentCard(arrPeople)
-                    }else{
+                    } else {
 
-                    const arrDepartaments = await ApiRequests.getAllUser()
-                    const arrPeople = arrDepartaments.filter(({department_uuid}) => department_uuid == departament)
-                    
-                    this.handleListPeopleDepartamentCard(arrPeople) 
-                }
+                        const arrDepartaments = await ApiRequests.getAllUser()
+                        const arrPeople = arrDepartaments.filter(({ department_uuid }) => department_uuid == departament)
+
+                        this.handleListPeopleDepartamentCard(arrPeople)
+                    }
                 })
-            },500)
+            }, 500)
         })
     }
 
-    static handleListPeopleDepartamentCard (arrPeople) {
-       
-        
+    static handleListPeopleDepartamentCard(arrPeople) {
+
+
         const ul = document.createElement("ul")
         ul.className = "card__list-slide-user"
         arrPeople.forEach((people) => {
 
-            let { username, professional_level, kind_of_work} = people
-            
+            let { username, professional_level, kind_of_work } = people
 
-            if (!kind_of_work ) {
+
+            if (!kind_of_work) {
                 kind_of_work = "Não especificado"
             }
-    
+
 
             ul.insertAdjacentHTML("beforeend", `
             <li class="list-slide__card">
@@ -463,12 +463,12 @@ class Departamentes {
                 <p><span>Modalidade:</span> ${kind_of_work}</p>       
             </li>
         "`)
-        this.handleClenContent()
-        this.contentContainer.append(ul)
+            this.handleClenContent()
+            this.contentContainer.append(ul)
         })
     }
 
-    static handleDimiss () {
+    static handleDimiss() {
         const buttonDismiss = document.getElementById("demitir-fun")
         buttonDismiss.addEventListener("click", () => {
             Modals.handleFormDemissHire()
@@ -480,11 +480,11 @@ class Departamentes {
                     ApiRequests.demissPeople(idPeople)
                 })
             }, 500);
-            
+
         })
     }
 
-    static handleHire () {
+    static handleHire() {
         const buttonHire = document.getElementById("contratar-fun")
         buttonHire.addEventListener("click", () => {
             Modals.handleFormDemissHire(true)
@@ -501,43 +501,43 @@ class Departamentes {
                     }
                     ApiRequests.hirePeople(people)
                 })
-            },500)
+            }, 500)
         })
     }
 
-    static handleEditPeople () {
+    static handleEditPeople() {
         const buttonEditPeople = document.getElementById("editar-fun")
         buttonEditPeople.addEventListener("click", () => {
-            Modals.handleFormEditPeople() 
+            Modals.handleFormEditPeople()
 
             setTimeout(() => {
-                const buttonEditForm = document.getElementById("buttonEdit")  
+                const buttonEditForm = document.getElementById("buttonEdit")
                 buttonEditForm.addEventListener("click", () => {
                     const idPeople = document.getElementById("selectPeopleForm").value
-                    const professional_level = document.getElementById("selectLevelForm").value  
+                    const professional_level = document.getElementById("selectLevelForm").value
                     const kind_of_work = document.getElementById("selectWorkForm").value
                     const body = {
                         professional_level: professional_level,
                         kind_of_work: kind_of_work
                     }
 
-                    ApiRequests.editPeopleAdm (idPeople, body)
+                    ApiRequests.editPeopleAdm(idPeople, body)
                 })
-            },500)
+            }, 500)
 
         })
     }
 
-    static handleDelUser () {
+    static handleDelUser() {
         const buttonDelUser = document.getElementById("del-fun")
         buttonDelUser.addEventListener("click", () => {
-            Modals.handleFormDelUser () 
+            Modals.handleFormDelUser()
 
             setTimeout(() => {
                 const buttonDelUserForm = document.getElementById("buttonDelUserForm")
                 buttonDelUserForm.addEventListener("click", () => {
                     const idUser = document.getElementById("selecDelUserForm").value
-                    ApiRequests.delUser (idUser)
+                    ApiRequests.delUser(idUser)
                 })
             }, 500);
         })

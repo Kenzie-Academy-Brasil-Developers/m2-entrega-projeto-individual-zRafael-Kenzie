@@ -1,17 +1,17 @@
 import { ApiRequests } from "./api.js"
 
 export class Modals {
-    
+
     static body = document.body
 
-    static handleRemoveModal () {
+    static handleRemoveModal() {
         const modal = document.querySelector(".modal__container")
         if (modal) {
             modal.remove()
         }
     }
 
-    static handleFormBasic (titleForm) {
+    static handleFormBasic(titleForm) {
         const form = document.createElement("form")
         const title = document.createElement("h2")
         const spanButtonClose = document.createElement("span")
@@ -19,7 +19,7 @@ export class Modals {
         form.className = "modal modal__form"
         title.className = "title-1"
         spanButtonClose.className = "modal__button-close"
-    
+
         title.innerHTML = titleForm
         spanButtonClose.innerText = "X"
 
@@ -39,16 +39,16 @@ export class Modals {
         return form
     }
 
-    static handleAppendForm (form) {
+    static handleAppendForm(form) {
         this.handleRemoveModal()
 
         const modalContainer = document.createElement("section")
-        modalContainer.className = "modal__container"    
+        modalContainer.className = "modal__container"
         modalContainer.append(form)
         this.body.append(modalContainer)
     }
 
-    static handleFormLogin () {
+    static handleFormLogin() {
         const form = this.handleFormBasic("Login")
 
         const inputEmail = document.createElement("input")
@@ -73,14 +73,14 @@ export class Modals {
 
         button.innerText = "Login"
         button.id = "buttonLoginForm"
-        
-  
+
+
         form.append(inputEmail, inputPassword, button)
         this.handleAppendForm(form)
     }
 
 
-    static handleFormRegister () {
+    static handleFormRegister() {
         const form = this.handleFormBasic("Cadastro")
 
         const inputEmail = document.createElement("input")
@@ -88,7 +88,7 @@ export class Modals {
         const inputName = document.createElement("input")
         const select = document.createElement("select")
         const button = document.createElement("button")
-  
+
 
 
         const arrProfessionalLevel = ["Estágio", "Júnior", "Pleno", "Sênior"]
@@ -105,7 +105,7 @@ export class Modals {
             select.append(option)
         })
 
-        button.className = "button-default button-primary"        
+        button.className = "button-default button-primary"
         inputEmail.className = "inputs"
         inputPassword.className = "inputs"
         inputName.className = "inputs"
@@ -137,7 +137,7 @@ export class Modals {
         this.handleAppendForm(form)
     }
 
-    static async handleFormCreateCompany () {
+    static async handleFormCreateCompany() {
         const form = this.handleFormBasic("Criar Empresa")
 
         const inputName = document.createElement("input")
@@ -174,13 +174,13 @@ export class Modals {
         inputHours.value = "12:00"
         inputHours.required = true
 
-    
+
         button.innerText = "Cadastrar Empresa"
 
 
 
         const arrSectorsAll = await ApiRequests.getAllSectores()
-        
+
         const option = document.createElement("option")
 
         option.innerText = "Selecionar setor da empresa"
@@ -195,13 +195,13 @@ export class Modals {
             option.innerText = description
             select.append(option)
         })
-        
-        form.append(inputName ,inputDescription, inputHours, select, button)
+
+        form.append(inputName, inputDescription, inputHours, select, button)
         this.handleAppendForm(form)
     }
 
 
-    static async handleFormCreateDepartament () {
+    static async handleFormCreateDepartament() {
         const form = this.handleFormBasic("Criar Departamento")
 
         const inputName = document.createElement("input")
@@ -224,7 +224,7 @@ export class Modals {
         inputDescription.name = "description"
         inputDescription.placeholder = "Descrição do departamento"
         inputDescription.required = true
-        
+
         select.className = "selects"
         select.id = "selectCompanieForm"
 
@@ -237,12 +237,12 @@ export class Modals {
         button.className = "button-default button-primary"
         button.innerText = "Criar Departamento"
         button.id = "buttonCreateDepartamentForm"
-        
-        const arrCompanies = await ApiRequests.getAllCompanies() 
+
+        const arrCompanies = await ApiRequests.getAllCompanies()
         arrCompanies.forEach((companie) => {
             const { name, uuid } = companie
             const option = document.createElement("option")
- 
+
             option.value = uuid
             option.innerText = name
 
@@ -253,8 +253,8 @@ export class Modals {
         this.handleAppendForm(form)
     }
 
-    static async listCompanie () {
-        const arrCompanies = await ApiRequests.getAllCompanies() 
+    static async listCompanie() {
+        const arrCompanies = await ApiRequests.getAllCompanies()
 
         const form = this.handleFormBasic("Selecione uma Empresa")
         const select = document.createElement("select")
@@ -279,7 +279,7 @@ export class Modals {
 
             option.value = uuid
             option.innerText = name
-   
+
             select.append(option)
         })
 
@@ -287,7 +287,7 @@ export class Modals {
         this.handleAppendForm(form)
     }
 
-    static ediDepartament () {
+    static ediDepartament() {
         const form = this.handleFormBasic("Edidar descrição")
         const inputDescription = document.createElement("input")
         inputDescription.className = "inputs"
@@ -306,39 +306,39 @@ export class Modals {
         this.handleAppendForm(form)
     }
 
-    static async handleFormViewPeople () {
+    static async handleFormViewPeople() {
 
         const form = this.handleFormBasic("Visualizar funcionários")
 
         const selectDepartaments = document.createElement("select")
         const buttonView = document.createElement("button")
-        
-        
+
+
         buttonView.className = "button-default button-primary"
         buttonView.id = "buttonViewPeopleForm"
         buttonView.innerText = "Visualizar"
-      
+
         selectDepartaments.className = "selects"
         selectDepartaments.id = "selectDepartamentForm"
-            
+
 
         const arrDepartaments = await ApiRequests.getAllDepartaments()
         const optionDefault = document.createElement("option")
         const optionOutOfWork = document.createElement("option")
-        
+
         optionDefault.innerText = "selecionar Departamento"
         optionDefault.selected = true
         optionDefault.disabled = true
         optionOutOfWork.innerText = 'Fora de serviço'
         optionOutOfWork.value = 'out'
 
-        selectDepartaments.append(optionDefault,optionOutOfWork)
-    
+        selectDepartaments.append(optionDefault, optionOutOfWork)
+
         arrDepartaments.forEach((departament) => {
             const optionDepartament = document.createElement("option")
 
             const { uuid, name } = departament
-            
+
             optionDepartament.value = uuid
             optionDepartament.innerText = name
             selectDepartaments.append(optionDepartament)
@@ -350,7 +350,7 @@ export class Modals {
         this.handleAppendForm(form)
     }
 
-    static async handleFormDemissHire (isHire) {
+    static async handleFormDemissHire(isHire) {
 
         let title = ""
         if (isHire) {
@@ -358,9 +358,9 @@ export class Modals {
         } else {
             title = "Demitir Funcionário"
         }
-        
+
         const form = this.handleFormBasic(title)
-        
+
         const selectCompanies = document.createElement("select")
         const selectDepartaments = document.createElement("select")
         const selectPeople = document.createElement("select")
@@ -368,9 +368,9 @@ export class Modals {
         buttonDemissHire.className = "button-default button-primary"
         buttonDemissHire.id = "buttonDemissHire"
         buttonDemissHire.backgroundColor = "red"
-        
+
         if (isHire) {
-            
+
             buttonDemissHire.innerText = "Contrarta"
         } else {
             buttonDemissHire.innerText = "Demitir"
@@ -385,13 +385,13 @@ export class Modals {
         const optionDefaultCompanies = document.createElement("option")
         const optionDefaultDepartamentes = document.createElement("option")
         const optionDefaultPeople = document.createElement("option")
-        
-        
+
+
         optionDefaultCompanies.innerText = "Selecione a empresa"
         optionDefaultCompanies.selected = true
         optionDefaultCompanies.disabled = true
         selectCompanies.append(optionDefaultCompanies)
-        
+
         optionDefaultDepartamentes.innerText = "Selecione o departamento"
         optionDefaultDepartamentes.selected = true
         optionDefaultDepartamentes.disabled = true
@@ -413,7 +413,7 @@ export class Modals {
             optionCompanies.innerHTML = name
             selectCompanies.append(optionCompanies)
         })
-        
+
 
         selectCompanies.addEventListener("change", async () => {
             const valueCp = selectCompanies.value
@@ -425,7 +425,7 @@ export class Modals {
             selectDepartaments.append(optionDefaultDepartamentes)
 
             const arrDepartaments = await ApiRequests.getSectorsCompanie(valueCp)
-            
+
             arrDepartaments.forEach((departament) => {
                 const { uuid, name } = departament
                 const optionDepartaments = document.createElement("option")
@@ -438,7 +438,7 @@ export class Modals {
 
         selectDepartaments.addEventListener("change", async () => {
             const valueDp = selectDepartaments.value
-            
+
             selectPeople.innerHTML = ""
             optionDefaultPeople.innerText = "Selecione o funcionário"
             optionDefaultPeople.selected = true
@@ -448,7 +448,7 @@ export class Modals {
             const arrPeople = await ApiRequests.getAllUser()
             arrPeople.forEach((people) => {
 
-                const {uuid, username, department_uuid } = people
+                const { uuid, username, department_uuid } = people
                 if (isHire) {
                     if (!department_uuid) {
                         const optionPeople = document.createElement("option")
@@ -457,8 +457,8 @@ export class Modals {
                         selectPeople.append(optionPeople)
                     }
                 } else {
-                    if(department_uuid == valueDp) {
-    
+                    if (department_uuid == valueDp) {
+
                         const optionPeople = document.createElement("option")
                         optionPeople.value = uuid
                         optionPeople.innerText = username
@@ -475,10 +475,10 @@ export class Modals {
 
 
 
-    static async handleFormEditPeople () {
-    
+    static async handleFormEditPeople() {
+
         const form = this.handleFormBasic("Editar informção do funcinário")
-        
+
         const selectCompanies = document.createElement("select")
         const selectDepartaments = document.createElement("select")
         const selectPeople = document.createElement("select")
@@ -505,13 +505,13 @@ export class Modals {
         const optionDefaultCompanies = document.createElement("option")
         const optionDefaultDepartamentes = document.createElement("option")
         const optionDefaultPeople = document.createElement("option")
-        
-        
+
+
         optionDefaultCompanies.innerText = "Selecione a empresa"
         optionDefaultCompanies.selected = true
         optionDefaultCompanies.disabled = true
         selectCompanies.append(optionDefaultCompanies)
-        
+
         optionDefaultDepartamentes.innerText = "Selecione o departamento"
         optionDefaultDepartamentes.selected = true
         optionDefaultDepartamentes.disabled = true
@@ -533,7 +533,7 @@ export class Modals {
             optionCompanies.innerHTML = name
             selectCompanies.append(optionCompanies)
         })
-        
+
 
         selectCompanies.addEventListener("change", async () => {
             const valueCp = selectCompanies.value
@@ -545,7 +545,7 @@ export class Modals {
             selectDepartaments.append(optionDefaultDepartamentes)
 
             const arrDepartaments = await ApiRequests.getSectorsCompanie(valueCp)
-            
+
             arrDepartaments.forEach((departament) => {
                 const { uuid, name } = departament
                 const optionDepartaments = document.createElement("option")
@@ -558,7 +558,7 @@ export class Modals {
 
         selectDepartaments.addEventListener("change", async () => {
             const valueDp = selectDepartaments.value
-            
+
             selectPeople.innerHTML = ""
             optionDefaultPeople.innerText = "Selecione o funcionário"
             optionDefaultPeople.selected = true
@@ -567,7 +567,7 @@ export class Modals {
 
             const arrPeople = await ApiRequests.getAllUser()
             arrPeople.forEach((people) => {
-                const {uuid, username, department_uuid } = people
+                const { uuid, username, department_uuid } = people
 
                 if (department_uuid == valueDp) {
                     const optionPeople = document.createElement("option")
@@ -577,15 +577,15 @@ export class Modals {
                 }
             })
         })
-        
+
 
         selectPeople.addEventListener("change", async () => {
             const valuePe = selectPeople.value
             const arrPeople = await ApiRequests.getAllUser()
 
-            const people = arrPeople.find(({uuid}) => uuid == valuePe)
+            const people = arrPeople.find(({ uuid }) => uuid == valuePe)
 
-            const {professional_level, kind_of_work} = people
+            const { professional_level, kind_of_work } = people
 
 
             const optionWorkDefault = document.createElement("option")
@@ -608,7 +608,7 @@ export class Modals {
                     const optionLevel = document.createElement("option")
                     optionLevel.innerText = level
                     optionLevel.value = level
-    
+
                     selectLevel.append(optionLevel)
                 }
             })
@@ -617,24 +617,24 @@ export class Modals {
                 if (work != kind_of_work) {
                     const optionWork = document.createElement("option")
                     optionWork.innerText = work
-                    optionWork.value = work  
-                    
+                    optionWork.value = work
+
                     selectWork.append(optionWork)
                 }
             })
         })
 
-        form.append(selectCompanies, selectDepartaments, selectPeople, selectWork, selectLevel,buttonEdit)
-        this.handleAppendForm(form)     
+        form.append(selectCompanies, selectDepartaments, selectPeople, selectWork, selectLevel, buttonEdit)
+        this.handleAppendForm(form)
     }
 
 
-    static handleFormEditUser () {
+    static handleFormEditUser() {
         const form = this.handleFormBasic("Editar dados")
 
         const inputUsername = document.createElement("input")
         const inputEmail = document.createElement("input")
-        const inputPassword= document.createElement("input")
+        const inputPassword = document.createElement("input")
         const buttonEditForm = document.createElement("button")
 
         inputUsername.type = "text"
@@ -659,14 +659,14 @@ export class Modals {
         buttonEditForm.id = "buttonEditForm"
         buttonEditForm.innerText = "Editar"
 
-        form.append(inputUsername, inputEmail, inputPassword,buttonEditForm)
+        form.append(inputUsername, inputEmail, inputPassword, buttonEditForm)
 
         this.handleAppendForm(form)
 
     }
 
 
-    static async handleFormDelUser () {
+    static async handleFormDelUser() {
         const form = this.handleFormBasic("Deletar usuário")
 
         const selecDelUser = document.createElement("select")
