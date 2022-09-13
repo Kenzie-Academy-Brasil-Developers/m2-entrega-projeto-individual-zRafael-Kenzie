@@ -302,6 +302,8 @@ class Departamentes {
         const buttonCreate = document.getElementById("create-dep")
         buttonCreate.addEventListener("click", () => {
             Modals.handleFormCreateDepartament()
+            const nav = document.getElementById('nav');
+            nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonCreateForm = document.getElementById("buttonCreateDepartamentForm")
@@ -310,6 +312,9 @@ class Departamentes {
                     const name = document.getElementById("inputName").value
                     const description = document.getElementById("inputDescription").value
                     const company_uuid = document.getElementById("selectCompanieForm").value
+
+
+
 
                     if (name && description != "") {
                         const companie = {
@@ -329,6 +334,8 @@ class Departamentes {
         const buttonListDepartamentes = document.getElementById("listar-dep")
         buttonListDepartamentes.addEventListener("click", () => {
             Modals.listCompanie()
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonListForm = document.getElementById("buttonListDepartamentCompanieForm")
@@ -384,6 +391,8 @@ class Departamentes {
         const buttonEditDel = document.getElementById("editar-dep")
         buttonEditDel.addEventListener("click", () => {
             Modals.handleFormDepartamentSpec(true)
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonEdit = document.getElementById("buttonEditForm")
@@ -421,6 +430,8 @@ class Departamentes {
         const buttonView = document.getElementById("exibir-fun")
         buttonView.addEventListener("click", () => {
             Modals.handleFormViewPeople()
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonViewPeopleForm = document.getElementById("buttonViewPeopleForm")
@@ -472,6 +483,8 @@ class Departamentes {
         const buttonDismiss = document.getElementById("demitir-fun")
         buttonDismiss.addEventListener("click", () => {
             Modals.handleFormDemissHire()
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonDemissForm = document.getElementById("buttonDemissHire")
@@ -488,6 +501,8 @@ class Departamentes {
         const buttonHire = document.getElementById("contratar-fun")
         buttonHire.addEventListener("click", () => {
             Modals.handleFormDemissHire(true)
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonHireForm = document.getElementById("buttonDemissHire")
@@ -509,6 +524,8 @@ class Departamentes {
         const buttonEditPeople = document.getElementById("editar-fun")
         buttonEditPeople.addEventListener("click", () => {
             Modals.handleFormEditPeople()
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonEditForm = document.getElementById("buttonEdit")
@@ -532,6 +549,8 @@ class Departamentes {
         const buttonDelUser = document.getElementById("del-fun")
         buttonDelUser.addEventListener("click", () => {
             Modals.handleFormDelUser()
+            const nav = document.getElementById('nav');
+                    nav.classList.remove('active');
 
             setTimeout(() => {
                 const buttonDelUserForm = document.getElementById("buttonDelUserForm")
