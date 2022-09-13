@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/styles/reset.css">
+    <link rel="stylesheet" href="/src/styles/buttons.css">
+    <link rel="stylesheet" href="/src/styles/variaveis.css">
+    <link rel="stylesheet" href="/src/modals/modais.css">
+    <link rel="stylesheet" href="/src/styles/dashAdmin.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="header">
+        <a id="logo" href="">Tech Empresas</a>
+        <nav id="nav">
+          <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">Menu
+            <span id="hamburger"></span>
+          </button>
+          <ul id="menu" role="menu">
+            <li><a id="create-dep">Criar Departamento</a></li>
+            <li><a id="listar-dep">Listar Departamentos</a></li>
+            <li><a id="editar-dep">Editar Departamento</a></li>
+            <li><a id="exibir-fun">Exibir Funcionario</a></li>
+            <li><a id="demitir-fun">Demitir Funcionario</a></li>
+            <li><a id="contratar-fun">Contratar Funcionario</a></li>
+            <li><a id="editar-fun">Editar Funcionario</a></li>
+            <li><a id="del-fun">Deletar Funcionario</a></li>
+          </ul>
+        </nav>
+        <button class='button-default'id="logoutBtn">Logout</button>
+      </header>
+    <main class="main__container container">
+        <section class="search__container">
+            <h3>Pesquisar Empresa</h3>
+
+            <select class="selects" name="" id="selectListSector">
+                <option value="" selected disabled>Selecionar ramo</option>
+                <option value="all">Todas as empresas</option>
+
+            </select>
+            <input class="inputs" type="text" placeholder="Digite nome de uma empresa" id="inputSearch">
+
+            <button class="button-default button-primary" id="buttonCreateCompany">Criar Empresa</button>
+        </section>
+        <section class="out-of-work">
+          <ul class="workers__list">
+
+          </ul>
+        </section>
+
+
+        <section class="companies__container">
+            <ul class="companies__list">
+
+            </ul>
+        </section>
+    </main>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="/src/js/dashboardAdm.js"></script>
+</body>
+
+</html>
