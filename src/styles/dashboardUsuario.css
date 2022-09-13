@@ -6,11 +6,11 @@
     background-color: var(--color-white);
     margin-bottom: 30px;
     color: var(--color-gray-0);
-    border: 5px inset rgba(35,139,207,0.52);
-border-radius: 9px;
+    border: 5px inset rgba(35, 139, 207, 0.52);
+    border-radius: 9px;
 }
 
-header{
+header {
     align-items: center;
 }
 
@@ -23,8 +23,8 @@ header{
     flex-direction: column;
     gap: 36px;
     justify-content: center;
-    
-}    
+
+}
 
 .container__card {
     width: 100%;
@@ -65,5 +65,5 @@ header{
         width: 100%;
         max-width: 1280px;
         margin: 0 auto;
-    }    
+    }
 }
