@@ -350,6 +350,84 @@ export class Modals {
         this.handleAppendForm(form)
     }
 
+    static async handleFormDepartamentSpec (edit) {
+        
+        let title = ""
+        const selectCompanies = document.createElement("select")
+        const selectDepartaments = document.createElement("select")
+        const buttoList = document.createElement("button")
+        const buttonDel = document.createElement("button")
+        
+        if (edit) {
+            title = "Editar ou deletar departamento"
+            buttonDel.className = "button-default button-primary"
+            buttonDel.innerText = "Deletar"
+            buttonDel.id = "buttonDelForm"
+            buttonDel.style.backgroundColor = "red"
+
+            buttoList.innerText = "Editar"
+            buttoList.id = "buttonEditForm"
+        } else {
+            title = "Selecione a empresa e o departamento"
+            buttoList.innerText = "Deletar"
+            buttoList.id = "buttonListDepartamentSpecForm"
+        }
+
+        const form = this.handleFormBasic(title)
+        
+        buttoList.className = "button-default button-primary"
+        
+        const optionCompaniesDefault = document.createElement("option")
+        optionCompaniesDefault.innerText = "Selecionar Empresa"
+        optionCompaniesDefault.disabled = true
+        optionCompaniesDefault.selected = true
+        selectCompanies.className = "selects"
+        selectCompanies.id = "selectCompaniesForm"
+        selectCompanies.append(optionCompaniesDefault)
+        
+        const optionDepartamentDefault = document.createElement("option")
+        optionDepartamentDefault.innerText = "selecionar Departamento"
+        optionDepartamentDefault.selected = true
+        optionDepartamentDefault.disabled = true
+        selectDepartaments.className = "selects"
+        selectDepartaments.id = "selectDepartamentForm"
+        selectDepartaments.append(optionDepartamentDefault)
+
+        const arrCompanies = await ApiRequests.getAllCompanies()
+        arrCompanies.forEach((companie) => {
+            const optionCompanies = document.createElement("option")
+
+            const { uuid, name } = companie
+            optionCompanies.value = uuid
+            optionCompanies.innerText = name
+ 
+            selectCompanies.append(optionCompanies)
+        })
+
+        selectCompanies.addEventListener("change", async () => {
+          
+            const value = selectCompanies.value
+
+            const arrDepartaments = await ApiRequests.getSectorsCompanie(value)
+            arrDepartaments.forEach((departament) => {
+                const optionDepartament = document.createElement("option")
+
+                const { uuid, name } = departament
+                optionDepartament.value = uuid
+                optionDepartament.innerText = name
+                selectDepartaments.append(optionDepartament)
+ 
+                selectDepartaments.append(optionDepartament)
+            })
+        })
+
+        form.append(selectCompanies, selectDepartaments, buttoList)
+        if (edit) {
+            form.append(buttonDel)
+        }
+        this.handleAppendForm(form)
+    }
+
     static async handleFormDemissHire(isHire) {
 
         let title = ""
